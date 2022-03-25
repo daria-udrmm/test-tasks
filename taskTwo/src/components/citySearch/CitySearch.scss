@@ -1,0 +1,77 @@
+*{
+    box-sizing: border-box;
+}
+.container{
+    max-width: 1440px;
+    padding: 0 30px;
+    margin: 0 auto;
+}
+.city{
+    &__search{
+        max-width: 450px;
+        margin: 50px auto 0;
+    }
+    &__undefined{
+        font-size: 22px;
+        font-style: italic;
+    }
+    &__list{
+        background-color: #fff;
+        padding: 0 10px;
+        border: 2px solid #fff;
+        box-shadow: 0 0 18px 0 rgba(34, 60, 80, 0.4);
+        div{
+            font-size: 18px;
+        }
+    }
+    &__one{
+        padding: 9px 0;
+        cursor: pointer;
+        position: relative;
+        transition: all .1s;
+        &::after{
+            position: absolute;
+            content: '';
+            height: 1px;
+            background-color: #ccc;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+        }
+        &:last-child{
+            &::after{
+                content: none;
+            }
+        }
+        &:hover{
+            background-color: #a3c3e7;
+            color: #fff;
+        }
+    }
+    &__bigList{
+        max-height: 450px;
+        max-width: 450px;
+        margin: 0 auto;
+        overflow-y: scroll;
+        overflow-x: visible;
+    }
+    &__input input{
+        outline: none;
+        padding: 8px 10px;
+        font-size: 18px;
+        margin-bottom: 20px;
+        max-width: 450px;
+        width: 100%;
+        border-radius: 7px;
+        border: 8px solid rgb(230, 230, 230);
+    }
+    &__bigList{
+        &::-webkit-scrollbar {
+            width: 8px;
+            background-color: #a3c3e7;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #0b2366;
+        }
+    }
+}
