@@ -1,10 +1,10 @@
-##How to start:
+## How to start:
 
 ### `npm i`
 ### `npm run dev`
 ### `npm start`
 
 
-##How to build:
+## How to build
 ### `npm run build`
 
