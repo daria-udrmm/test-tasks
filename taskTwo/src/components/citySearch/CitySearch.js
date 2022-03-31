@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import fetchJsonp from 'fetch-jsonp';
 import './CitySearch.scss';
+import debounce from 'lodash.debounce';
 
 const CitySearch = () => {
 
@@ -9,13 +10,13 @@ const CitySearch = () => {
     const inputRef = useRef()
 
     useEffect(() => {
-        const getCity = (city) => {
-            fetchJsonp(`https://kladr-api.ru/api.php?query=${city}&contentType=city`)
-                .then(data => data.json())
-                .then(data => setCities(data.result))
-                .catch(err => console.log('parsing failed', err))
+        const getCity = () => {
+            fetchJsonp(`https://kladr-api.ru/api.php?query=${search}&contentType=city`)
+            .then(data => data.json())
+            .then(data => setCities(data.result))
+            .catch(err => console.log('parsing failed', err))
         }
-        getCity(search)
+        getCity();
     }, [search])
 
     const makeList = (array) => {
@@ -39,6 +40,8 @@ const CitySearch = () => {
             setSearch(e.target.value)
         }
     }
+
+    const debouncedChangeHandler = useCallback(debounce(russianLanguageTest, 100), []);
 
     const checkResponse = () => {
         if (cities?.length > 1) {
@@ -65,7 +68,7 @@ const CitySearch = () => {
                     <input type="text"
                         placeholder="Введите город"
                         ref={inputRef}
-                        onChange={(e) => russianLanguageTest(e)}
+                        onChange={(e) => debouncedChangeHandler(e)}
                         />
                 </label>
             </div>
