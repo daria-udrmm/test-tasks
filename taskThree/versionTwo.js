@@ -18,14 +18,14 @@ const obj = {
 const makeNewObject = () => {
     const changeToUpperCase = (obj) => {
         for (let key in obj){
-            let typeObj = obj[key];
+            const typeObj = obj[key];
             if (typeof typeObj == 'object' && !Array.isArray(typeObj)) {
-                obj[`${(key.toUpperCase())}`] = typeObj;
+                obj[key.toUpperCase()] = typeObj;
                 changeToUpperCase(typeObj);
-                delete obj[`${key}`];
+                delete obj[key];
             } else {
-                obj[`${(key.toUpperCase())}`] = typeObj;
-                delete obj[`${key}`];
+                obj[key.toUpperCase()] = typeObj;
+                delete obj[key];
             }
         }
         return obj

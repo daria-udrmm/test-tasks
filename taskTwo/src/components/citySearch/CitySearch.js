@@ -5,9 +5,10 @@ import debounce from 'lodash.debounce';
 
 const CitySearch = () => {
 
-    const [cities, setCities] = useState();
+    const [cities, setCities] = useState(null);
     const [search, setSearch] = useState('');
-    const inputRef = useRef()
+    const inputRef = useRef();
+    const FREE = 'Free';
 
     useEffect(() => {
         const getCity = () => {
@@ -20,24 +21,24 @@ const CitySearch = () => {
     }, [search])
 
     const makeList = (array) => {
-        return array.map(elem => {
-            if (elem.id !== 'Free'){
+        return array.map(element => {
+            if (element.id !== FREE){
                 return (
-                    <div key={elem.id}
+                    <div key={element.id}
                     onClick={() => {
-                        inputRef.current.value = elem.name;
-                        setCities('')
+                        inputRef.current.value = element.name;
+                        setCities(null)
                     }}
-                    className='city__one'>{elem.name}</div>
+                    className='city__one'>{element.name}</div>
                 )
             }
         })
     }
 
-    const russianLanguageTest = (e) => {
+    const russianLanguageTest = (event) => {
         let russianLang = /[а-яА-ЯёЁ]/i;
-        if (russianLang.test(e.target.value) || e.target.value.length === 0){
-            setSearch(e.target.value)
+        if (russianLang.test(event.target.value) || event.target.value.length === 0){
+            setSearch(event.target.value)
         }
     }
 
@@ -68,7 +69,7 @@ const CitySearch = () => {
                     <input type="text"
                         placeholder="Введите город"
                         ref={inputRef}
-                        onChange={(e) => debouncedChangeHandler(e)}
+                        onChange={debouncedChangeHandler}
                         />
                 </label>
             </div>
